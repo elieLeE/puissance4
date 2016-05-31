@@ -7,15 +7,19 @@
 #include "../../src/spec/define.h"
 #include "assert.h"
 
-void gainEnCol(valCaseGrille **grille, unsigned int debLig, unsigned int col);
-void gainEnLigne(valCaseGrille **grille, unsigned int debLig, unsigned int col);
-void gainEnDiagonaleDroite(valCaseGrille **grille, unsigned int debLig, unsigned int col);
-void gainEnDiagonaleGauche(valCaseGrille **grille, unsigned int debLig, unsigned int col);
+valCaseGrille hasPlayer();
 
-void noGainEnCol(valCaseGrille **grille, unsigned int debLig, unsigned int col);
-void noGainEnLigne(valCaseGrille **grille, unsigned int debLig, unsigned int col);
-void noGainEnDiagonaleDroite(valCaseGrille **grille, unsigned int debLig, unsigned int col);
-void noGainEnDiagonaleGauche(valCaseGrille **grille, unsigned int debLig, unsigned int col);
+void structSpec(valCaseGrille** grille, valCaseGrille player);
+
+void gainEnCol(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+void gainEnLigne(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+void gainEnDiagonaleDroite(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+void gainEnDiagonaleGauche(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+
+void noGainEnCol(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+void noGainEnLigne(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+void noGainEnDiagonaleDroite(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
+void noGainEnDiagonaleGauche(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
 
 void remplissageToDrawGame(valCaseGrille** grille);
 

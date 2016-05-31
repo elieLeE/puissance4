@@ -7,7 +7,7 @@
 #include "../spec/enum.h"
 #include "../spec/define.h"
 
-menuStart choixMenuStart();
-menuOptions choixMenuOptions();
+menuStart choixMenuStart(void);
+menuOptions choixMenuOptions(void);
 
 #endif

@@ -2,10 +2,10 @@
 
 menuStart choixMenuStart(){
     int choix = -1;
-    printf("0 : Player Vs Player\n");
-    printf("1 : Player Vs Computer\n");
-    printf("2 : Options\n");
-    printf("3 : Quitter\n");
+    printf("%d : Player Vs Player\n", PLAYER_VS_PLAYER);
+    printf("%d : Player Vs Computer\n", PLAYER_VS_COMPUTER);
+    printf("%d : Options\n", OPTIONS);
+    printf("%d : Quitter\n", QUITTER_START);
 
     int err =  lectureSecuriseInt(&choix);
     while((err != 0) || ((choix < 0) || (choix >= nbreEnumMenu()))){
@@ -21,7 +21,9 @@ menuOptions choixMenuOptions(){
     int choix = -1;
 
     printf("Menu Options : \n");
-    printf("0 : changer le niveau de l'IA\n");
+    printf("%d : Changer le niveau de l'IA\n", SET_LEVEL);
+    printf("%d : Quitter\n", QUITTER_OPTS);
+
     int err =  lectureSecuriseInt(&choix);
     while((err != 0) || ((choix < 0) || (choix >= nbreEnumOptions()))){
 	printf("Veuillez recommencer\n");

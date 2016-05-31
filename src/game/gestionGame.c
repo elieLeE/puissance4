@@ -1,8 +1,9 @@
 #include "gestionGame.h"
 
 void game(const menuStart modeGame){
-    bool b;
+    bool J1ToPlay, b;
     int eval = 0;
+    int coup;
     valCaseGrille **grille = (valCaseGrille**)allocTab2D(NBRE_RANGE, NBRE_COLONNE, sizeof(**grille));
     initGrille(grille);
 
@@ -11,17 +12,22 @@ void game(const menuStart modeGame){
      *	    => J1 = Human
      *	    => J2 = Computer
      * */
-    b = ((rand()%(3-1)+1) == PLAYER_1);	//true <==> a J1 de jouer
+    J1ToPlay = ((rand()%(3-1)+1) == PLAYER_1);	//true <==> a J1 de jouer
     
-    while(gameOver(evalGrille(grille))){
-	affJoueurToPlay(b);
+    while(!gameOver(eval = evalGrille(grille))){
+	printf("eval : %d\n", eval);
+	b = (modeGame == PLAYER_VS_PLAYER) || J1ToPlay;
+	if(b){
+	    affJoueurToPlay(J1ToPlay);
+	}
 	//A etudier (conversion => si mets pas ==> warnng)
 	//affGrille((const valCaseGrille**const)grille);
 	affGrille(grille);
-	b = !b;
-	addCoup(grille, nextCoup(grille, (modeGame == PLAYER_VS_PLAYER) || b), b?PLAYER_1:PLAYER_2);
-	eval = evalGrille(grille);
+	J1ToPlay = !J1ToPlay;
+	coup = nextCoup(grille, b);
+	addCoup(grille, coup, J1ToPlay?PLAYER_1:PLAYER_2);
     }
+    printf("eval : %d\n", eval);
     affResultatGame(eval);
     //affGrille((const valCaseGrille**const)grille);
     affGrille(grille);
@@ -32,6 +38,6 @@ void game(const menuStart modeGame){
 }
 
 bool gameOver(const int eval){
-    return !((eval == PLAYER_1_WIN) || (eval == PLAYER_2_WIN) || (eval == DRAW_GAME));
+    return ((eval == PLAYER_1_WIN) || (eval == PLAYER_2_WIN) || (eval == DRAW_GAME));
 }
 

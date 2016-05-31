@@ -4,12 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 #include "../spec/enum.h"
 #include "../donnees/evaluationGrille.h"
 #include "../game/gestionGame.h"
 #include "../game/gestionCoup.h"
 
-unsigned int minMax(valCaseGrille **grille, const unsigned int p, const bool modeMax);
+unsigned int evalMax(valCaseGrille **grille, const unsigned int p);
+unsigned int evalMin(valCaseGrille **grille, const unsigned int p);
+unsigned int minMax(valCaseGrille **grille, const unsigned int p);
 bool betterCoup(const int minOrMaxEval, const int eval, const bool modeMax);
 
 #endif

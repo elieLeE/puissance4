@@ -12,9 +12,9 @@ struct structOptions{
     unsigned int niveauIA;
 };
 
-void gestionOptions();
-structOptions* getOptions();
-void initOptions();
-void setNiveauIA();
+void gestionOptions(void);
+structOptions* getOptions(void);
+void initOptions(void);
+void setNiveauIA(int level);
 
 #endif

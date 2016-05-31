@@ -7,8 +7,11 @@ int main(){
 
     testEvaluationColonne();
     testEvaluationLigne();
-    testEvaluationDiagonale();
+    testEvaluationDiagonaleDroite();
+    testEvaluationDiagonaleGauche();
     testDraw();
+
+    testSpec();
 
     return 0;
 }

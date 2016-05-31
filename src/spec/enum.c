@@ -1,9 +1,9 @@
 #include "enum.h"
 
-int nbreEnumMenu(){
+int nbreEnumMenu(void){
     return 4;
 }
 
-int nbreEnumOptions(){
-    return 1;
+int nbreEnumOptions(void){
+    return 2;
 }

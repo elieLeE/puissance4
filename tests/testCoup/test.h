@@ -15,5 +15,8 @@
 
 void testValiditeCoup();
 void testCoupComputerLigne();
+void testCoupComputerCol();
+void testCoupComputerDiagDroite();
+void testCoupComputerDiagGauche();
 
 #endif

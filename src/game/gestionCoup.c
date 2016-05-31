@@ -27,7 +27,8 @@ unsigned int nextCoupHuman(valCaseGrille* grille){
 
 unsigned int nextCoupComputer(valCaseGrille **grille){
     structOptions *opt = getOptions();
-    return minMax(grille, opt->niveauIA, true);
+    //printf("niveau : %d\n", opt->niveauIA);
+    return minMax(grille, opt->niveauIA);
 }
 
 /*

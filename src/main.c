@@ -14,6 +14,7 @@ int main(){
     bool b;
     int reStart = -1, err;
     initOptions();
+    printf("options.niveauIA : %d\n", getOptions()->niveauIA);
 
     do{
 	b = true;
@@ -30,7 +31,7 @@ int main(){
 		gestionOptions();
 		break;
 
-	    case QUITTER:
+	    case QUITTER_START:
 		b = false;
 		break;
 	}
