@@ -19,4 +19,6 @@ void testCoupComputerCol();
 void testCoupComputerDiagDroite();
 void testCoupComputerDiagGauche();
 
+void testSpec();
+
 #endif

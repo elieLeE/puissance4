@@ -1,31 +1,44 @@
 #include "minMax.h"
 
 unsigned int minMax(valCaseGrille **grille, const unsigned int p){
-    int eval = evalGrille(grille);
     unsigned int i;
     unsigned int bestCoup = 0;
-    int minOrMaxEval = INT_MAX;
 
-    /*printf("first, minMax\n");
-    affGrille(grille);*/
+    evalStruct evalMax, eval;
+    evalMax.eval = INT_MIN;
+    evalMax.prof = 0;
+
+    /*int evalMax = INT_MIN;
+    int eval;
+    */
+
+    nbreLigneSaute(100);
+    affGrille(grille);
     if(p == 0){
 	return (rand()%(NBRE_COLONNE-0)+0);
     }
     
     for(i=0; i<NBRE_COLONNE; i++){
 	if(grille[NBRE_RANGE-1][i] == NO_PLAY){
+	    printf("coup : %d", i);
 	    addCoup(grille, i, PLAYER_2);
 	    eval = evalMin(grille, p-1);
-	    /*printf("eval : %d, minOrMaxEval : %d\n", eval, minOrMaxEval);
-	    nbreLigneSaute(2);*/
-	    if(minOrMaxEval > eval){
+	    if(bestEval(&eval, &evalMax)){
+	    //if(evalMax < eval){
 		bestCoup = i;
-		minOrMaxEval = eval;
+		//max = eval;
+		eval = evalMax;
 	    }
+	    //else if((max == eval) && (rand()%2 == 0)){
+	    /*else if(sameEval(&evalMax, &eval) && (rand()%2 == 0)){
+		bestCoup = i;
+		//max = eval;
+		eval = evalMax;
+	    }*/
 	    removeCoup(grille, i);
+	    nbreLigneSaute(40);
 	}
     }
-    //printf("choix : %d\n", bestCoup+1);
     return bestCoup;
 }
 
@@ -34,57 +47,110 @@ unsigned int minMax(valCaseGrille **grille, const unsigned int p){
  * c'est a dire ayant la meilleur evaluation
  * s'interrompt (dans le for) si on trouve un coup donnant le gain pour IA
  * */
-unsigned int evalMax(valCaseGrille **grille, const unsigned int p){
-    int eval = evalGrille(grille);
+evalStruct evalMax(valCaseGrille **grille, const unsigned int p){
+//unsigned int evalMax(valCaseGrille **grille, const unsigned int p);
     unsigned int i;
-    int maxEval = INT_MAX;
-    
-    //affGrille(grille);
-    if(gameOver(eval) || p == 0){
+    unsigned int bestCoup = -1;
+
+    evalStruct evalMax, eval;
+    evalMax.eval = INT_MIN;
+    evalMax.prof = 0;
+    eval.eval = evalGrille(grille);
+    if(gameOver(eval.eval) || p == 0){
+	printf(" => eval : %d\n", eval.eval);
+	eval.prof = p;
 	return eval;
     }
 
+    /*int maxEval = INT_MIN;
+    int eval = evalGrille(grille);
+    if(gameOver(eval) || p == 0){
+	printf(" => eval : %d\n", eval);
+	//affGrille(grille);
+	return eval;
+    }*/
+
     for(i=0; i<NBRE_COLONNE; i++){
 	if(grille[NBRE_RANGE-1][i] == NO_PLAY){
+	    printf(" => coup : %d", i);
 	    addCoup(grille, i, PLAYER_2);
 	    eval = evalMin(grille, p-1);
-	    /*printf("eval : %d, max : %d\n", eval, maxEval);
-	    nbreLigneSaute(2);*/
-	    if(maxEval < eval){
-		maxEval = eval;
+	    nbreDecal(4-p+1);
+	    if(p!=1){
+		printf("\n");
 	    }
+	    if(bestEval(&eval, &evalMax)){
+	    //if(maxEval < eval){
+		evalMax = eval;
+		bestCoup = i;
+	    }
+	    //else if((evalMax == eval) && (rand()%2 == 0)){
+	    /*else if(sameEval(&eval, &evalMax) && (rand()%2 == 0)){
+		bestCoup = i;
+		//maxEval = eval;
+		evalMax = eval;
+	    }*/
 	    removeCoup(grille, i);
 	}
     }
-    return maxEval;
+    /*printf("\n");
+    nbreDecal(4-p+1);
+    printf("==> eval : %d, coup : %d\n", evalMax.eval, bestCoup);*/
+    return evalMax;
 }
 
 /*
  * point de vue human player => on retourne la meilleur evaluation pour le joeur humain, c'est a dire la pire pour l'IA
  * on s'arrete (dans le for) si on trouve un coup donnant le gain pour l'human player
  * */
-unsigned int evalMin(valCaseGrille **grille, const unsigned int p){
-    int eval = evalGrille(grille);
+evalStruct evalMin(valCaseGrille **grille, const unsigned int p){
+//unsigned int evalMax(valCaseGrille **grille, const unsigned int p);
     unsigned int i;
-    int minEval = INT_MIN;
+    unsigned int bestCoup = -1;
 
-    //affGrille(grille);
-    if(gameOver(eval) || p == 0){
+    evalStruct evalMin, eval;
+    evalMin.eval = INT_MAX;
+    evalMin.prof = 0;
+    eval.eval = evalGrille(grille);
+    if(gameOver(eval.eval) || p == 0){
+	printf(" => eval : %d\n", eval.eval);
 	return eval;
     }
 
+    /*int evalMin = INT_MAX;
+    int eval = evalGrille(grille);
+    if(gameOver(evalMin) || p == 0){
+	printf(" => eval : %d\n", eval);
+	return eval;
+    }
+    */
+
     for(i=0; i<NBRE_COLONNE; i++){
 	if(grille[NBRE_RANGE-1][i] == NO_PLAY){
+	    printf(" => coup : %d", i);
 	    addCoup(grille, i, PLAYER_1);
-	    eval = evalMin(grille, p-1);
-	    /*printf("eval : %d, min : %d\n", eval, minEval);
-	    nbreLigneSaute(2);*/
-	    if(minEval < eval){
-		minEval = eval;
+	    eval = evalMax(grille, p-1);
+	    nbreDecal(4-p+1);
+	    /*if(p!=1){
+		printf("\n");
+	    }*/
+	    if(bestEval(&evalMin, &eval)){
+	    //if(minEval > eval){
+		//minEval = eval;
+		evalMin = eval;
+		bestCoup = i;
 	    }
+	    //else if((minEval == eval) && (rand()%2 == 0)){
+	    /*else if(sameEval(&eval, &evalMin) && (rand()%2 == 0)){
+		bestCoup = i;
+		evalMin = eval;
+	    }*/
 	    removeCoup(grille, i);
 	}
     }
-    return minEval;
+    /*printf("\n");
+    nbreDecal(4-p+1);
+    printf("==> eval : %d, coup : %d\n", minEval, bestCoup);*/
+    return evalMin;
 }
 

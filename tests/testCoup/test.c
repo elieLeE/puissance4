@@ -50,6 +50,7 @@ void testCoupComputerLigne(){
 
     printf("testCoupComputerLigne\n");
     printf("\tcoupDeSurvie : ");
+    nbreLigneSaute(1);
     for(i=0; i<NBRE_RANGE; i++){
 	for(j=0; j<NBRE_COLONNE-2; j++){
 	    gauche = (rand()%(2-0) == 0);	    // true => avant
@@ -64,7 +65,10 @@ void testCoupComputerLigne(){
     }
     printf("\t\tOK\n");
 
+    //nbreLigneSaute(10);
+
     printf("\tcoupDeGain : ");
+    nbreLigneSaute(1);
     for(i=0; i<NBRE_RANGE; i++){
 	for(j=0; j<NBRE_COLONNE-2; j++){
 	    gauche = (rand()%(2-0) == 0);	    // true => avant
@@ -121,7 +125,7 @@ void testCoupComputerDiagDroite(){
     initGrille(grille);
 
     printf("testEvaluationDiagonaleDroite : \n");
-    printf("\ttestGameOver : ");
+    printf("\tcoupDeSurvie : ");
     for(i=0; i<4; i++){
 	for(j=0; j<5; j++){
 	    if(((i==0) && (j==NBRE_COLONNE-3)) || ((i==NBRE_RANGE-3) && (j==0))){
@@ -136,14 +140,14 @@ void testCoupComputerDiagDroite(){
 	    /*affGrille(grille);
 	    printf("expectedMove : %d\n", expectedMove+1);
 	    nbreLigneSaute(5);*/
-	    //affDebug(grille, PLAYER_2, j);
+	    affDebug(grille, PLAYER_2, expectedMove);
 	    //assert(evalGrille(grille) == PLAYER_1_WIN);
 	    initGrille(grille);
 	}
     }
     printf("\t\tTODO\n");
 
-    printf("\ttestGameNotOver : ");
+    printf("\tcoupDeGain : ");
     for(i=0; i<4; i++){
 	for(j=0; j<5; j++){
 	    if(((i==0) && (j==NBRE_COLONNE-3)) || ((i==NBRE_RANGE-3) && (j==0))){
@@ -155,7 +159,7 @@ void testCoupComputerDiagDroite(){
 	    almostGainEnDiagonaleDroite(grille, i, j, PLAYER_2, gauche);
 	    eval = evalGrille(grille);
 	    //affGrille(grille);
-	    //affDebug(grille, PLAYER_2, j);
+	    affDebug(grille, PLAYER_2, expectedMove);
 	    //assert((eval > (PLAYER_2_WIN)) && (eval < PLAYER_1_WIN));
 	    initGrille(grille);
 	}
@@ -177,7 +181,7 @@ void testCoupComputerDiagGauche(){
     initGrille(grille);
 
     printf("testCoupComputerDiagGauche\n");
-    printf("\ttestGameOver : ");
+    printf("\tcoupDeSurvie : ");
 
     for(i=0; i<NBRE_RANGE-2; i++){
 	for(j=2; j<NBRE_COLONNE; j++){
@@ -189,14 +193,14 @@ void testCoupComputerDiagGauche(){
 	    expectedMove = gauche?j-1:j+3;
 	    almostGainEnDiagonaleGauche(grille, i, j, PLAYER_1, gauche);
 	    //affGrille(grille);
-	    //affDebug(grille, PLAYER_2, j);
+	    affDebug(grille, PLAYER_2, expectedMove);
 	    //assert(evalGrille(grille) == PLAYER_1_WIN);
 	    initGrille(grille);
 	}
     }
     printf("\t\tTODO\n");
 
-    printf("\ttestGameNotOver : ");
+    printf("\tcoupDeGain : ");
     for(i=0; i<NBRE_RANGE-2; i++){
 	for(j=2; j<NBRE_COLONNE; j++){
 	    if(((i==0) && (j==2)) || ((i==NBRE_RANGE-3) && (j == NBRE_COLONNE-1))){
@@ -207,7 +211,7 @@ void testCoupComputerDiagGauche(){
 	    expectedMove = gauche?j-1:j+3;
 	    almostGainEnDiagonaleGauche(grille, i, j, PLAYER_2, gauche);
 	    eval = evalGrille(grille);
-	    //affDebug(grille, PLAYER_2, j);
+	    affDebug(grille, PLAYER_2, expectedMove);
 	    //assert((eval > (PLAYER_2_WIN)) && (eval < PLAYER_1_WIN));
 	    initGrille(grille);
 	}
@@ -215,5 +219,17 @@ void testCoupComputerDiagGauche(){
     printf("\tTODO\n");
     printf("\n");
 
+    liberationTab2D((void**)grille, NBRE_RANGE);
+}
+
+void testSpec(){
+    valCaseGrille **grille = (valCaseGrille**)allocTab2D(NBRE_RANGE, NBRE_COLONNE, sizeof(**grille));
+    initGrille(grille);
+    
+    debutConnu(grille);
+    affGrille(grille);
+    affDebug(grille, PLAYER_2, 6);
+
+    printf("\n");
     liberationTab2D((void**)grille, NBRE_RANGE);
 }

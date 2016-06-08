@@ -12,6 +12,8 @@
 
 void affDebug(valCaseGrille **grille, valCaseGrille player, unsigned int expectedMove);
 
+void debutConnu(valCaseGrille **grille);
+
 void almostGainEnCol(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille player);
 void almostGainEnLigne(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille, bool);
 void almostGainEnDiagonaleDroite(valCaseGrille **grille, unsigned int debLig, unsigned int col, valCaseGrille, bool);

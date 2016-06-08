@@ -54,6 +54,9 @@ char* affCase(const valCaseGrille c){
 
 	case PLAYER_2:
 	    return "o";
+
+	case VAL_TEST:
+	    return "-";
     }
     return "";
 }

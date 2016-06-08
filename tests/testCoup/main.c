@@ -7,14 +7,15 @@ int main(){
     initOptions();
 
     testValiditeCoup();
+    setNiveauIA(4);
 
-    setNiveauIA(2);
+    testSpec();
+
     printf("profondeur : %d\n", getOptions()->niveauIA);
     testCoupComputerLigne();
     testCoupComputerCol();
     testCoupComputerDiagDroite();
     testCoupComputerDiagGauche();
-    return 0;
 
     return 0;
 

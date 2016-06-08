@@ -11,17 +11,17 @@ int evalGrille(valCaseGrille ** grille){
     int evalPlayer2 = evalGrillePlayer(grille, PLAYER_2);
     int const marge = 1000;
 
-    if(evalPlayer1 >= PLAYER_1_WIN-marge){
+    if(evalPlayer1 <= PLAYER_1_WIN+marge){
 	return PLAYER_1_WIN;
     }
-    else if(evalPlayer2 <= PLAYER_2_WIN+marge){	//on realise des sommes de nombre principalement >=0 => 1000 >> max valGrille (si la partie n'est pas finie
+    else if(evalPlayer2 >= PLAYER_2_WIN-marge){	//on realise des sommes de nombre principalement >=0 => 1000 >> max valGrille (si la partie n'est pas finie
 	return PLAYER_2_WIN;
     }
     else if(drawGame(grille[NBRE_RANGE-1])){
 	return DRAW_GAME;
     }
     else{
-	return (evalPlayer1 - evalPlayer2);
+	return -(evalPlayer1 - evalPlayer2);
     }
 }
 
@@ -92,6 +92,7 @@ int evalPlayerCol(valCaseGrille**  grille, valCaseGrille player, unsigned int co
 	    compt = 0;
 	}
     }
+    return 0;
     int result = compt2*(4-((int)fabs(((int)col)-3)));
     return result;
 }

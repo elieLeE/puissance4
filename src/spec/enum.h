@@ -10,7 +10,7 @@ typedef enum valGrille valGrille;
 enum menuStart{PLAYER_VS_PLAYER, PLAYER_VS_COMPUTER, OPTIONS, QUITTER_START};
 enum menuOptions{SET_LEVEL, QUITTER_OPTS};
 
-enum valCaseGrille{NO_PLAY, PLAYER_1, PLAYER_2};
+enum valCaseGrille{NO_PLAY, PLAYER_1, PLAYER_2, VAL_TEST};
 
 int nbreEnumMenu(void);
 int nbreEnumOptions(void);

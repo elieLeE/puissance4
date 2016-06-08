@@ -12,7 +12,7 @@ void game(const menuStart modeGame){
      *	    => J1 = Human
      *	    => J2 = Computer
      * */
-    J1ToPlay = ((rand()%(3-1)+1) == PLAYER_1);	//true <==> a J1 de jouer
+    J1ToPlay = ((rand()%(PLAYER_2+1-PLAYER_1)+PLAYER_1) == PLAYER_1);	//true <==> a J1 de jouer
     
     while(!gameOver(eval = evalGrille(grille))){
 	printf("eval : %d\n", eval);
@@ -25,6 +25,12 @@ void game(const menuStart modeGame){
 	affGrille(grille);
 	J1ToPlay = !J1ToPlay;
 	coup = nextCoup(grille, b);
+	if(J1ToPlay){
+	    printf("J1ToPlay true\n");
+	}
+	else{
+	    printf("J1ToPlay false\n");
+	}
 	addCoup(grille, coup, J1ToPlay?PLAYER_1:PLAYER_2);
     }
     printf("eval : %d\n", eval);
